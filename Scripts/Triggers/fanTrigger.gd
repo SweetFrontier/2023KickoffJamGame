@@ -56,7 +56,8 @@ func react():
 	fanSprite.frame = 0
 	fanSprite.play()
 
-func reset():
+func reset(bossy : int = 0):
+	print_debug("THE FANS ARE NOT BOSS COMPATIBLE")
 	super.reset()
 	currState = FanState.OFF
 	fanSprite.animation = stateToAnimString[currState]

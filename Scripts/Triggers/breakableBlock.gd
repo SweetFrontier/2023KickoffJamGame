@@ -18,8 +18,9 @@ func react():
 	super.react()
 	destroy(true)
 
-func reset():
-	super.reset()
+func reset(state : int = 0):
+	print_debug("BREAKABLE BLOCK IS NOT BOSS COMPATIBLE")
+	super.reset(state)
 	# unexplode the Block
 	explodeable_polygon.reset()
 	# Enable collision.

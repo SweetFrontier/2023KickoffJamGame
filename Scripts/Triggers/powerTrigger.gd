@@ -44,8 +44,9 @@ func react():
 		setState(PowerState.ON)
 		#releasePower()
 
-func reset():
-	super.reset()
+func reset(state : int = 0):
+	print_debug("THE POWER TRIGGERS ARE NOT BOSS COMPATIBLE")
+	super.reset(state)
 	$WireDetection.monitoring = true
 	$WireDetection.monitorable = true
 	

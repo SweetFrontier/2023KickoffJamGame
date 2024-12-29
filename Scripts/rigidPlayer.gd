@@ -26,6 +26,11 @@ class_name rigidPlayer
 @export var deathBounceRequirement : int = 5; # number of frames in a row must turn before explode
 @export var won_level : bool = false
 
+@export_group("BossLevel")
+@export var BossPhasePositions : Array[Vector2] = []
+@onready var BossCheckpointsEnabled : bool = (BossPhasePositions.size() > 0)
+@onready var ThisBossLevel : levelControllerBoss = get_parent()
+
 signal player_death_signal
 
 var current_direction = Vector2.RIGHT
@@ -58,6 +63,9 @@ func _ready():
 	last_y_velocity = 0
 	dead = false
 	starting_transform = get_global_transform()
+	# if boss level then override global transform with first coordinates in the list
+	if (BossCheckpointsEnabled):
+		starting_transform = Transform2D(0, BossPhasePositions[0])
 	reset()
 
 func reset():
@@ -106,6 +114,10 @@ func reset():
 	last_y_velocity = 0
 	inSoda = 0
 	STOP = false
+	
+	# boss checkpoint system :D
+	if (BossCheckpointsEnabled):
+		starting_transform = Transform2D(0, BossPhasePositions[ThisBossLevel.currentState])
 
 func _integrate_forces(state):
 	#If STOPPED, don't MOVE

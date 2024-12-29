@@ -50,8 +50,9 @@ func react():
 		free_movement()
 		
 
-func reset():
-	super.reset()
+func reset(state : int = 0):
+	print_debug("THE FELLA BOX TRIGGERS ARE NOT BOSS COMPATIBLE")
+	super.reset(state)
 	area2D.monitoring = true
 	currState = BoxState.OPEN
 	doorSprite.animation = stateToAnimString[currState]

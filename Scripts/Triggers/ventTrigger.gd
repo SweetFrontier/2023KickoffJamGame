@@ -71,8 +71,9 @@ func react():
 		$VentEntrance/BallCollision/CollisionShape2D.shape.radius = 1+entranceSprite.frame*3
 		$VentEntrance/BallCollision/CollisionShape2D.position.y = 15-entranceSprite.frame*3
 
-func reset():
-	super.reset()
+func reset(state : int = 0):
+	print_debug("VENT IS INCOMPATIBLE WITH BOSS")
+	super.reset(state)
 	currState = VentState.CLOSED
 	entranceSprite.animation = stateToAnimString[currState]
 	doorStop.visible = false

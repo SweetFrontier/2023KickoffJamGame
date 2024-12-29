@@ -19,6 +19,18 @@ func _on_start_button_pressed():
 	get_tree().paused = false
 
 func _on_restart_button_pressed():
+	if (get_tree().paused and boss):
+		# boss level, show conform screen
+		$VBoxContainer.visible = false
+		$DeathImage.visible = false
+		$EscAnimatedSprite2D.visible = true
+		$BackQuoteAnimatedSprite2D.visible = true
+		$VBoxContainer/ResumeButton.disabled = false
+		main.resetLevel()
+		return
+	restart()
+
+func restart(from_beginning : bool = false):
 	sound.play()
 	$VBoxContainer.visible = false
 	$DeathImage.visible = false
@@ -63,7 +75,7 @@ func _input(event: InputEvent) -> void:
 				$EscAnimatedSprite2D.frame = 0
 		if event.keycode == KEY_QUOTELEFT and event.pressed and pausable:
 			$BackQuoteAnimatedSprite2D.frame = 1
-			_on_restart_button_pressed()
+			restart()
 		else:
 			$BackQuoteAnimatedSprite2D.frame = 0
 

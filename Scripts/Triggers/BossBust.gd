@@ -38,8 +38,9 @@ func react():
 	
 	emit_signal("drop_boss_bust_signal", dropAnimationName)
 
-func reset():
-	super.reset()
+func reset(state : int = 0):
+	print_debug("BOSS BUST IS NOT (modern revised) BOSS COMPATIBLE")
+	super.reset(state)
 	TriggerKeySprite.modulate.a = 0
 	bustSprite.position = startingPosition
 	bustSprite.frame = 0

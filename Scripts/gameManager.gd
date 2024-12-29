@@ -41,18 +41,19 @@ func _ready() -> void:
 		#boss level
 		var bossy = clamp(int((current_level+1) / 10), 1, 4)
 		musicPlayer.changeMusic("boss"+str(bossy));
-	elif (current_level < musicChangePoints[0]):
-		musicPlayer.set_stream(load("res://Sounds/Music/puzzle(calm).ogg"))
-	elif (current_level < musicChangePoints[1]):
-		musicPlayer.set_stream(load("res://Sounds/Music/puzzle(midlevels).ogg"))
-	elif (current_level < musicChangePoints[2]):
-		musicPlayer.set_stream(load("res://Sounds/Music/puzzle(intense).ogg"))
-	elif (current_level < musicChangePoints[3]):
-		musicPlayer.set_stream(load("res://Sounds/Music/puzzle(act_three).ogg"))
 	else:
-		musicPlayer.set_stream(load("res://Sounds/Music/puzzle(act_four).ogg"))
-	#play music
-	musicPlayer.play()
+		if (current_level < musicChangePoints[0]):
+			musicPlayer.set_stream(load("res://Sounds/Music/puzzle(calm).ogg"))
+		elif (current_level < musicChangePoints[1]):
+			musicPlayer.set_stream(load("res://Sounds/Music/puzzle(midlevels).ogg"))
+		elif (current_level < musicChangePoints[2]):
+			musicPlayer.set_stream(load("res://Sounds/Music/puzzle(intense).ogg"))
+		elif (current_level < musicChangePoints[3]):
+			musicPlayer.set_stream(load("res://Sounds/Music/puzzle(act_three).ogg"))
+		else:
+			musicPlayer.set_stream(load("res://Sounds/Music/puzzle(act_four).ogg"))
+		#play music
+		musicPlayer.play()
 	
 	resetWipeTransitionContoller.connect("screenCovered", screen_wipe_covered)
 	#movingStart = camera.global_position

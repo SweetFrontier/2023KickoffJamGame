@@ -23,8 +23,9 @@ func react():
 		#play the boom sound
 		sound_child.play()
 
-func reset():
-	super.reset()
+func reset(state : int = 0):
+	print_debug("THE INVISIBLE BLOCKS ARE NOT BOSS COMPATIBLE")
+	super.reset(state)
 	implodeable_polygon.reset()
 	# Make the block translucent
 	implodeable_polygon.color.a = translucent_opacity

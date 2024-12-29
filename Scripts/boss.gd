@@ -5,7 +5,7 @@ class_name boss
 @export var stickyMultiplier = 0.5
 @export var lurchAmount = 2000
 @export var decayAmount = 1000
-@export var currState : BossState
+@export var currState : BossStateEnum
 @export var explodablePolygon : explodeablePolygon
 
 @export var spriteAnim: AnimatedSprite2D
@@ -40,7 +40,7 @@ var fansInRange : Array[fanTrigger]
 @export var maxFanVelocity: float = 20.0
 var fanConst = 350
 
-enum BossState
+enum BossStateEnum
 {
 	CHASING,
 	EATING,
@@ -52,10 +52,10 @@ const munch = preload("res://Sounds/boss/swollow.ogg")
 const crushed = preload("res://Sounds/death.ogg")
 
 func _ready():
-	currState = BossState.BEINGCONTROLLED
+	currState = BossStateEnum.BEINGCONTROLLED
 
 func reset():
-	currState = BossState.BEINGCONTROLLED
+	currState = BossStateEnum.BEINGCONTROLLED
 	playAnimation("chasing")
 	currDirection = Vector2.RIGHT
 	collisionShape.position.x = 56
@@ -75,7 +75,7 @@ func _physics_process(delta):
 	elif inSoda >= 1:
 		gravity_scale = stickyMultiplier
 	
-	if(currState == BossState.CHASING):
+	if(currState == BossStateEnum.CHASING):
 		# Add the gravity.
 		if not is_on_floor():
 			velocity.y += gravity * delta * gravity_scale
@@ -88,7 +88,7 @@ func _physics_process(delta):
 		velocity.x = currDirection.x * speed * delta * gravity_scale
 		velocity += calc_fan_forces(fansInRange) * fanConst * delta * gravity_scale
 		move_and_slide()
-	elif(currState == BossState.EATING):
+	elif(currState == BossStateEnum.EATING):
 		if velocity.x > 0:
 			velocity.x = max(velocity.x - decayAmount * delta, 0)
 		elif velocity.x < 0:
@@ -140,7 +140,7 @@ func hitSomethingEatable(body):
 		eatingTarget.explode()
 	elif eatingTarget is SodaBall:
 		eatingTarget.reset()
-	currState = BossState.EATING
+	currState = BossStateEnum.EATING
 	velocity.x = lurchAmount * currDirection.x
 	bossSounds.stream = munch
 	bossSounds.volume_db = 5
@@ -165,10 +165,10 @@ func onAnimationFinished():
 		eatingCollision = null
 		
 		playAnimation("chasing")
-		currState = BossState.CHASING
+		currState = BossStateEnum.CHASING
 	elif spriteAnim.animation == "growling":
 		playAnimation("chasing")
-		currState = BossState.CHASING
+		currState = BossStateEnum.CHASING
 
 func playAnimation(animation):
 	spriteAnim.play(animation)

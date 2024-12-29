@@ -58,8 +58,9 @@ func react():
 			pivotProgress = 0
 			currState = SecurityCameraState.MOVINGTOPOSITION
 
-func reset():
-	super.reset()
+func reset(state : int = 0):
+	print_debug("THE CAMERAS ARE NOT BOSS COMPATIBLE")
+	super.reset(state)
 	cameraView.monitoring = false
 	cameraSprite.animation = "deactivated"
 	gunSprite.animation = "default"

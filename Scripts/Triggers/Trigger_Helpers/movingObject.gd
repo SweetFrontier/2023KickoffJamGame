@@ -17,6 +17,11 @@ class_name movingObject
 
 @export var hittingSound : Array[String] = ["hitsomething.ogg"]
 
+#Variables for boss levels
+@export_group("bossStates")
+@export var bossStates : Array[BossState]
+
+
 var levelPlayer : rigidPlayer
 
 var just_destroyed = false
@@ -49,7 +54,9 @@ func _ready():
 	startingCollMask = collision_mask
 	reset()
 
-func reset():
+func reset(state : int = 0):
+	if (bossStates.size() > 0):
+		pass # TODO: position. I have absolutely no clue where or how to do this
 	set_collision_layer_value(1, true)
 	set_collision_layer_value(5, true)
 	set_collision_mask_value(1, true)

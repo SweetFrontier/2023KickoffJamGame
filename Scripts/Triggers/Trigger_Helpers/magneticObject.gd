@@ -27,8 +27,9 @@ var stateToAnimString = {
 func _ready():
 	super._ready()
 
-func reset():
-	super.reset()
+func reset(state : int = 0):
+	print_debug("THE MAGNETIC OBJECTS ARE NOT BOSS COMPATIBLE")
+	super.reset(state)
 	clearElectricity()
 
 func _process(delta):

@@ -26,8 +26,9 @@ func react():
 		BlockSprite.animation = "activated"
 		BlockSprite.frame = 0
 
-func reset():
-	super.reset()
+func reset(state : int = 0):
+	print_debug("TRAMPOLINE IS INCOMPATIBLE WITH BOSS")
+	super.reset(state)
 	area2D.monitoring = false
 	BlockSprite.animation = "deactivated"
 	if startActivated:

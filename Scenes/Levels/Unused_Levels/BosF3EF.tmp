@@ -23,7 +23,6 @@ layer_0/tile_data = PackedInt32Array(1441792, 65539, 0, 1441793, 65539, 0, 14417
 [node name="rigidPlayer" parent="." instance=ExtResource("3_37a51")]
 position = Vector2(43, 688)
 deathBounceRequirement = 10
-BossPhasePositions = Array[Vector2]([Vector2(43, 688), Vector2(611, 688)])
 
 [node name="CenterPosition" type="Marker2D" parent="."]
 position = Vector2(320, 144)
@@ -36,7 +35,6 @@ position = Vector2(928, 640)
 texture = ExtResource("6_6r162")
 
 [node name="BossStateTrigger" type="Area2D" parent="."]
-position = Vector2(669, 669)
 script = ExtResource("6_n7alh")
 
 [node name="Box" type="CollisionShape2D" parent="BossStateTrigger"]

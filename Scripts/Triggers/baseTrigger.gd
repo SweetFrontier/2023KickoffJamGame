@@ -64,6 +64,10 @@ var endRiderPos: Vector2
 var moveRiderProgress: float = 0.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+#Variables for boss levels
+@export_group("bossStates")
+@export var bossStates : Array[BossState]
+
 func _ready():
 	# Connect the input event to the `_input` method.
 	set_process_input(true)
@@ -91,20 +95,47 @@ func react():
 			# Start the fade timer.
 			button_fade_timer = button_fade_duration
 
-func reset():
-	if show_button:
-		TriggerKeySprite.show()
-		# Set the key to the "unpressed state"
-		TriggerKeySprite.frame = 0
-		# Reset the fade timer and opacity.
-		button_fade_timer = 0.0
-		TriggerKeySprite.modulate.a = startingTranslucency
-	activated = false
-	occupied = false
-	ridingBody = null
-	riderInPosition = false
-	moveRiderProgress = 0
-	
+func reset(state : int = 0):
+	if (bossStates.size() == 0):
+		#if this is not a boss level
+		if show_button:
+			TriggerKeySprite.show()
+			# Set the key to the "unpressed state"
+			TriggerKeySprite.frame = 0
+			# Reset the fade timer and opacity.
+			button_fade_timer = 0.0
+			TriggerKeySprite.modulate.a = startingTranslucency
+		activated = false
+		occupied = false
+		ridingBody = null
+		riderInPosition = false
+		moveRiderProgress = 0
+	else:
+		# if this is a boss level
+		
+		# find nearest preceding valid state
+		var validState = 0
+		while bossStates[validState].state_number < state and validState < bossStates.size():
+			validState += 1
+		validState = bossStates[validState]
+		
+		if bossStates[validState].active:
+			TriggerKeySprite.show()
+			# Set the key to the "unpressed state"
+			TriggerKeySprite.frame = 0
+			# Reset the fade timer and opacity.
+			button_fade_timer = 0.0
+			TriggerKeySprite.modulate.a = startingTranslucency
+		else:
+			# Set the button trigger
+			TriggerKeySprite.modulate.a = 0.0
+		activated = bossStates[validState].activated
+		occupied = false
+		ridingBody = null
+		riderInPosition = false
+		moveRiderProgress = 0
+
+
 func _physics_process(delta):
 	if button_fade_timer > 0.0:
 		# Calculate the new opacity based on the elapsed time and fade duration.

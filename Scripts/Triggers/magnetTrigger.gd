@@ -41,8 +41,9 @@ func _ready():
 	location = magneticSourcePoint.global_position
 	reset()
 
-func reset():
-	super.reset()
+func reset(state : int = 0):
+	print_debug("THE MAGNETS ARE NOT BOSS COMPATIBLE")
+	super.reset(state)
 	locked = false
 	if !show_button:
 		TriggerKeySprite.modulate.a = 0
