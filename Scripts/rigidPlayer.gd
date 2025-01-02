@@ -29,7 +29,7 @@ class_name rigidPlayer
 @export_group("BossLevel")
 @export var BossPhasePositions : Array[Vector2] = []
 @onready var BossCheckpointsEnabled : bool = (BossPhasePositions.size() > 0)
-@onready var ThisBossLevel : levelControllerBoss = get_parent()
+@onready var ThisBossLevel : levelControllerBoss = get_parent() if get_parent() is levelControllerBoss else null
 
 signal player_death_signal
 

@@ -84,8 +84,9 @@ func react():
 		spewSprite.visible = true
 		sodaBall.launch()
 
-func reset():
-	super.reset()
+func reset(state : int = 0):
+	print_debug("THE SODA TRIGGERS ARE NOT BOSS COMPATIBLE")
+	super.reset(state)
 	currState = SodaState.FULL
 	sodaBall.reset()
 	bottleSprite.position = startingPosition

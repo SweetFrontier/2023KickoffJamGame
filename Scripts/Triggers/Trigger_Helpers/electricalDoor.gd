@@ -55,8 +55,9 @@ func react():
 		#play the boom sound
 		soundChild.play()
 
-func reset():
-	super.reset()
+func reset(state : int = 0):
+	print_debug("THE ELECTRICAL DOORS ARE NOT BOSS COMPATIBLE")
+	super.reset(state)
 	changeState(startState)
 	if startActivated:
 		react()

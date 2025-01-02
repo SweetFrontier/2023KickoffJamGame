@@ -71,7 +71,8 @@ func _ready():
 	for magneticObject in magneticMovingObjects:
 		magneticObject.magnetTriggers = magnetTriggers.duplicate()
 
-func reset(phase:int = 0):
+func reset(phase:int = 0) -> bool:
+	if (bossTransitioning): return false
 	isCurrentLevel = true
 	availableKeys = range(48,58)+range(65,91)
 	remainingTriggerBlocks = triggerBlocks.duplicate(true)
@@ -94,6 +95,7 @@ func reset(phase:int = 0):
 	if sequencePlayer != null:
 		sequencePlayer.stop()
 		sequencePlayer.play(introAnimationName)
+	return true
 
 func levelEnded():
 	isCurrentLevel = false
